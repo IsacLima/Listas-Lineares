@@ -17,28 +17,26 @@ class LinearList:
 
 
     def insert(self, name, barCode, index):
-        
         # aqui inserimos se,  lista nao estiver cheia, ou index maior que o tanaho de alocação 
         # ou index menor que zero
 
-        if((self.init == 0 and self.end == self.max - 1) or (index > self.max) or (index < 0)):
+        if((self.init == 0 and self.end == self.max - 1) or (index > self.max) or (index <= 0)):
             print("ERRO: Posição inválida")
         else:
-        
             if(self.init == -1):
-                self.init = 0
-                self.end = 0
-         
+              self.init = index - 1
+              self.end = index - 1
+              index = 1
             #aqui movemos os valores da lista para encaixar o produto passado pelo usuario
             #se o fim da lista for igual ao valor maximo, movemos com passo negativo , ou seja, movemos
             #um pra tras e deixamos livre o espaço que o usuario vai usar
             else: 
                 if(self.end != self.max -1):
                     for i in range(self.end, self.init + index - 2, -1):
-                        self.vetor[i + 1] = self.vetor[i]
+                     		self.vetor[i + 1] = self.vetor[i]
                     self.end = self.end + 1
                 else:
-                    for i in range(self.init, self.init + index):
+                    for i in range(self.init, self.init + index - 1):
                         self.vetor[i - 1] =self.vetor[i]
                     self.init = self.init - 1
 
@@ -47,7 +45,6 @@ class LinearList:
 
 
     def remove(self, index):
-        print("\n",self.init, self.end, index ,"\n")
         if((index < 0) or index > self.max):
             print("ERRO: Posição inválida")
 
@@ -77,7 +74,6 @@ class LinearList:
         verificator = 0
         for i in range(self.max):
             if(self.vetor[self.init + i] != None):
-                print(name, self.vetor[self.init + i].name, i)
                 if(name == self.vetor[self.init + i].name):
                     verificator = verificator + 1
                     return i + 1
